@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Howler</title>
+    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Days+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+   
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <h1 class="howlerIcon" style="font-size: 5vw; color: rgb(26, 26, 26); font-family: Days One, sans-serif;
+                ;">Howle<img src="/static/img/howlerIcon.png" alt="Howler Icon" style="height: 3.3vw; margin-bottom: .3vw; border: 2px #393939;"></h1>
+            </a>
+            <div class="navbar-nav ms-auto">
+                <div id="currentUser" class="nav-item" style="font-size: 2vw;">
+                    <!-- Current user information will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </nav>  
+
+    <!-- New Howl Form -->
+    <div class="container mt-4">
+        <form id="new-howl-form">
+            <div class="mb-3">
+                <input type="text" class="form-control" id="howlContent" placeholder="What's howling?" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Howl</button>
+        </form>
+    </div>
+
+    <div class="container mt-4">
+        <h2 class="text-center">Following</h2>
+        <div class="divider" style="height: 5px;"></div>
+        <div id="howlsContainer" class="row">
+            <!-- Howls will be dynamically inserted here -->
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script>
+        let uname;
+        let av;
+        let first;
+        let last;
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fetch current user and followed howls when the page loads
+            fetchCurrentUserAndHowls();
+
+            // Add event listener for form submission
+            const newHowlForm = document.getElementById('new-howl-form');
+            newHowlForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission behavior
+
+                const howlContentInput = document.getElementById('howlContent');
+                const howlContent = howlContentInput.value.trim(); // Get text from input field
+                if (howlContent !== '') {
+
+                    const newHowlData = {
+                        text: howlContent,
+                        datetime: new Date().toISOString(),
+                        username: uname, // Add current user's username
+                        avatar: av 
+                    };
+
+                    // Call the API to post the new howl
+                    fetch('/api/howls', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(newHowlData)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Failed to post new howl');
+                        }
+                    })
+                    .then(newHowl => {
+                        // Automatically add the new howl to the top of the page
+                        prependNewHowlToPage(newHowl);
+
+                        // Reset the input field
+                        howlContentInput.value = '';
+                    })
+                    .catch(error => console.error('Error posting new howl:', error));
+                }
+            });
+        });
+
+        function prependNewHowlToPage(newHowl) {
+            const howlsContainer = document.getElementById('howlsContainer');
+
+            // Create HTML elements for the new howl
+            const howlElement = document.createElement('div');
+            howlElement.classList.add('howl');
+
+            // Create a container for user information
+            const userInfoContainer = document.createElement('div');
+            userInfoContainer.classList.add('user-info');
+
+            // Add avatar
+            const avatarImg = document.createElement('img');
+            if (newHowl.username && newHowl.avatar) {
+                avatarImg.src = newHowl.avatar;
+                avatarImg.alt = 'User Avatar';
+                avatarImg.classList.add('avatar');
+                userInfoContainer.appendChild(avatarImg);
+            }
+
+
+            const fullName = document.createElement('p');
+            fullName.classList.add('full-name');
+            fullName.textContent = `${first} ${last}`;
+            userInfoContainer.appendChild(fullName);
+
+            // Add username
+            const username = document.createElement('p');
+            username.classList.add('user-name');
+            if (newHowl.username) {
+                username.textContent = `@${newHowl.username}`;
+                userInfoContainer.appendChild(username);
+            }
+
+            // Add timestamp
+            const timestamp = document.createElement('p');
+            timestamp.classList.add('timestamp');
+            timestamp.textContent = new Date(newHowl.datetime).toLocaleString();
+
+            // Add howl content
+            const howlContent = document.createElement('p');
+            howlContent.classList.add('howl-content');
+            howlContent.textContent = newHowl.text;
+
+
+            // Append elements to the howl element
+            howlElement.appendChild(userInfoContainer);
+            howlElement.appendChild(timestamp);
+            howlElement.appendChild(howlContent);
+
+
+            // Prepend the new howl element to the howls container
+            howlsContainer.prepend(howlElement);
+        }
+
+
+
+
+
+
+        // Fetch the current user, followed users, and their howls
+        function fetchCurrentUserAndHowls() {
+            fetch('/api/current-user')
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Failed to fetch current user');
+                    }
+                })
+                .then(currentUser => {
+                    uname = currentUser.username;
+                    av = currentUser.avatar;
+                    first = currentUser.first_name;
+                    last = currentUser.last_name;
+
+                    // Populate the current user information in the header
+                    const currentUserDiv = document.getElementById('currentUser');
+                    currentUserDiv.innerHTML = `
+                        <span class="username" style="margin-right: 2vw; margin-bottom: 1vw;">@${currentUser.username}</span>
+                        <img class="user-avatar" src="${currentUser.avatar}" alt="User Avatar" style="width: 5vw; height: auto; background-color: aliceblue; margin-top: 1vw;">
+                    `;
+
+                    const userId = currentUser.id;
+                    fetch(`/api/users/${userId}/following`)
+                        .then(response => response.json())
+                        .then(followedUsers => {
+                            const followedUserIds = followedUsers.map(user => user.id);
+                            fetch(`/api/followed-howls?userIds=${followedUserIds.join(',')}`)
+                                .then(response => response.json())
+                                .then(followedHowls => {
+                                    // Filter out howls with undefined user
+                                    const validHowls = followedHowls.filter(howl => howl.userId);
+                                    displayFollowedHowls(validHowls);
+                                })
+                                .catch(error => console.error('Error fetching followed howls:', error));
+                        })
+                        .catch(error => console.error('Error fetching followed users:', error));
+                })
+                .catch(error => console.error('Error fetching current user:', error));
+        }
+
+
+
+        function displayFollowedHowls(howls) {
+            const howlsContainer = document.getElementById('howlsContainer');
+            howlsContainer.innerHTML = ''; // Clear previous content
+
+            howls.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
+
+            // Fetch user information for each howl
+            Promise.all(howls.map(howl => fetch(`/api/users/${howl.userId}`)))
+                .then(responses => Promise.all(responses.map(response => response.json())))
+                .then(users => {
+                    // Associate user information with each howl
+                    howls.forEach((howl, index) => {
+                        const user = howl.user = users[index]; // Add user information to howl object
+
+                        // Create HTML elements for each howl
+                        const howlElement = document.createElement('div');
+                        howlElement.classList.add('howl');
+
+                        // Create a container for user information
+                        const userInfoContainer = document.createElement('div');
+                        userInfoContainer.classList.add('user-info');
+
+                        // Add avatar
+                        if (user && user.avatar) {
+                            const avatarImg = document.createElement('img');
+                            avatarImg.src = user.avatar;
+                            avatarImg.alt = 'User Avatar';
+                            avatarImg.classList.add('avatar');
+                            userInfoContainer.appendChild(avatarImg);
+                        }
+
+                        // Add full name
+                        const fullName = document.createElement('p');
+                        fullName.classList.add('full-name');
+                        if (user) {
+                            fullName.textContent = `${user.first_name} ${user.last_name}`;
+                        }
+
+                        // Add username
+                        const username = document.createElement('a');
+                        if (user) {
+                            username.textContent = `@${user.username}`;
+                            username.href = `/profile?userId=${user.id}&username=${user.username}&avatar=${user.avatar}&firstName=${user.first_name}&lastName=${user.last_name}`;
+                            username.classList.add('user-link');
+                        }
+
+                        // Add timestamp
+                        const timestamp = document.createElement('p');
+                        timestamp.textContent = new Date(howl.datetime).toLocaleString();
+                        timestamp.classList.add('timestamp');
+
+                        // Add howl content
+                        const howlContent = document.createElement('p');
+                        howlContent.textContent = howl.text;
+                        howlContent.classList.add('howl-content');
+
+                        // Append elements to the howl element
+                        howlElement.appendChild(userInfoContainer);
+                        userInfoContainer.appendChild(fullName);
+                        userInfoContainer.appendChild(username);
+                        howlElement.appendChild(timestamp);
+                        howlElement.appendChild(howlContent);
+
+                        // Append the howl element to the howls container
+                        howlsContainer.appendChild(howlElement);
+                    });
+                })
+                .catch(error => console.error('Error fetching user information:', error));
+        }
+
+    </script>
+</body>
+
+</html>

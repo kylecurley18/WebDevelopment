@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <form id="paymentForm" action="/send" method="post" enctype="multipart/form-data">
+        <div class="container">
+            <section id="senderDetails">
+                <h2>Sender Details</h2>
+                <div class="image-upload">
+                    <label for="imageUpload">Upload Image:</label>
+                    <input type="file" id="imageUpload" name="imageUpload" accept="image/*" required>
+                </div>
+                <div id="imagePreview" class="image-preview"><img id="preview" src="#" alt="Preview"></div>
+                <div class="names">
+                    <div class="form-group">
+                        <label for="senderFirstName">First Name:</label>
+                        <input type="text" id="senderFirstName" name="senderFirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senderLastName">Last Name:</label>
+                        <input type="text" id="senderLastName" name="senderLastName" required>
+                    </div>
+                </div>
+            </section>
+            <hr>
+            <!-- Recipient Details section -->
+            <section id="recipientDetails">
+                <h2>Recipient Details</h2>
+                <div class="recipient-grid">
+                    <div class="left-column">
+                        <!-- Recipient Name -->
+                        <div class="form-group">
+                            <label for="recipientFirstName">Recipient First Name:</label>
+                            <input type="text" id="recipientFirstName" name="recipientFirstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipientLastName">Recipient Last Name:</label>
+                            <input type="text" id="recipientLastName" name="recipientLastName" required>
+                        </div>
+                        <!-- Message -->
+                        <div class="form-group">
+                            <label for="message">Message:</label>
+                            <textarea id="message" name="message" required minlength="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="right-column">
+                        <!-- Notify Recipient Options -->
+                        <div class="form-group">
+                            <label for="notifyRecipient">Notify Recipient:</label>
+                            <select id="notifyRecipient" name="notifyRecipient">
+                                <option value="email">Email</option>
+                                <option value="sms">SMS</option>
+                                <option value="none">Do not notify</option>
+                            </select>
+                        </div>
+                        <!-- Email -->
+                        <div class="form-group" id="emailGroup">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <!-- Phone -->
+                        <div class="form-group" id="phoneGroup">
+                            <label for="phone">Phone:</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+                </div>               
+            </section>      
+
+            
+            <!-- Payment Details section -->
+            <section id="paymentDetails">
+                <h2>Payment Details</h2>
+                <!-- Card Type -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cardType">Card Type:</label>
+                        <select id="cardType" name="cardType">
+                            <option value="visa">Visa</option>
+                            <option value="mastercard">Mastercard</option>
+                            <!-- Add other card types as needed -->
+                        </select>
+                    </div>
+                    <!-- Card Number -->
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number:</label>
+                        <input type="text" id="cardNumber" name="cardNumber" required pattern="\d{4}-\d{4}-\d{4}-\d{4}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <!-- Expiration -->
+                    <div class="form-group">
+                        <label for="expiration">Expiration:</label>
+                        <input type="month" id="expiration" name="expiration" required>
+                    </div>
+                    <!-- CCV -->
+                    <div class="form-group">
+                        <label for="ccv">CCV:</label>
+                        <input type="password" id="ccv" name="ccv" required pattern="\d{3,4}">
+                    </div>
+                    <!-- Amount -->
+                    <div class="form-group">
+                        <label for="amount">Amount:</label>
+                        <input type="number" id="amount" name="amount" step="0.01" required>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="form-group" id="terms-check">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the Terms and Conditions</label>
+                </div>
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <button type="submit">Send</button>
+                </div>
+            </section>
+        </div>
+    </form>
+
+    <script src="/js/imagePreview.js"></script>
+</body>
+</html>

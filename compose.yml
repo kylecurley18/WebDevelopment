@@ -1,0 +1,51 @@
+services:
+  proxy:
+    image: nginx:latest
+    restart: unless-stopped
+    volumes:
+      - ./proxy/default.conf.template:/etc/nginx/templates/default.conf.template
+    ports:
+      - "80:80"
+
+  hw1:
+    image: httpd:latest
+    restart: unless-stopped
+    volumes:
+      - ./Homework1:/usr/local/apache2/htdocs
+
+  hw2:
+    image: httpd:latest
+    restart: unless-stopped
+    volumes:
+      - ./Homework2:/usr/local/apache2/htdocs
+
+  hw3:
+    build:
+      context: ./Homework3
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+    - ./Homework3:/usr/local/app
+
+  hw4:
+    build:
+      context: ./Homework4
+      dockerfile: Dockerfile
+    # image: httpd:latest
+    restart: unless-stopped
+    volumes:
+      - ./Homework4/static:/app/static
+      - ./Homework4/templates:/app/templates
+      - ./Homework4/server.js:/app/server.js
+
+  hw5:
+    build:
+      context: ./Homework5
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./Homework5:/usr/local/app
+    environment:
+      - PORT=80
+    env_file:
+      - ./Homework5/.env
