@@ -1,5 +1,4 @@
-# CSC342 Kyle Curley Portfolio (kpcurley)
-## csc342-2024Spring-kpcurley
+# Kyle Curley Web Development Portfolio
 ### Table of Contents
 
 | **Homework** | **Description**   | **Link** | **Completed** |
