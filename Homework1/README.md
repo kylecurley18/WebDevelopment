@@ -1,0 +1,1 @@
+Used w3schools.com for better understanding of css and html concepts. Also used lecture slides.
