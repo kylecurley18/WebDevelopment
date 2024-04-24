@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+main {
+    font-family: 'Poppins', sans-serif;
+    background-color: rgba(0, 0, 0, 0.4); 
+}
+
+h1{
+    font-size: 5rem;
+    color: #FFF;
+
+}
+
+main {
+    width: 500px;
+    height: 400px;
+    
+    position: relative;
+}
+
+video {
+    width: 500px;
+    height: 400px;
+    object-fit: cover;
+}

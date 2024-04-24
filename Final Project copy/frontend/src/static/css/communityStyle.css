@@ -1,0 +1,79 @@
+/* Elements */
+
+main {
+    font-family: 'Poppins', sans-serif;
+    background-color: rgba(0, 0, 0, 0.6); 
+}
+
+/* IDs */
+
+#container {
+    background-color: rgba(255, 255, 255, 1);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#boardtitle {
+    text-decoration: underline;
+    text-align: center;
+}
+
+#add-friends-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#leaderboard {
+    text-align: center;
+    padding: 20px;
+}
+
+#topUsers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#runnerUps {
+    display: flex;
+    justify-content: center;
+}
+
+#others {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#others .userCard {
+    border: 1px solid #000;
+    width: 500px;
+}
+
+/* Classes */
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.pageTitle {
+    font-size: 3.5rem;
+    color: #FFF;
+
+}
+
+.card {
+    padding: 10px;
+}
+
+.userCard {
+    border: 3px solid #000;
+    width: 300px;
+}

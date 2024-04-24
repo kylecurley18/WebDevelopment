@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Icon kit from https://fontawesome.com/-->
+    <script src="https://kit.fontawesome.com/27c4ffa0b7.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/indexStyle.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script defer src="./js/script.js"></script>
+    <script defer type="module" src="./js/common.js"></script>
+    <link rel="manifest" href="../static/manifest.webmanifest" crossorigin="use-credentials" />
+    <meta name="theme-color" content="#252831">
+    <link rel="apple-touch-icon" href="../static/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="../static/img/favicon-32x32.png">
+    <title>Sidebar With Bootstrap</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <aside id="sidebar">
+            <div class="sidebar-bckgrd">
+                <div class="sidebar-logo">
+                    <a href="#">ParKQuest</a>
+                </div>
+                <!-- Sidebar Navigation -->
+                <ul class="sidebar-nav">
+                    
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <i class="fa-solid fa-list pe-2 fa-lg"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <i class="fa-solid fa-book pe-2 fa-xl"></i>
+                            History
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <i class="fa-solid fa-user-group pe-2 fa-xl"></i>
+                            Community
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="/social" class="sidebar-link">
+                            <i class="fa-solid fa-comment pe-2 fa-xl"></i>
+                            Social
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <i class="fa-solid fa-person-running pe-2 fa-xl"></i>
+                            Activity
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <i class="fa-solid fa-chart-line pe-2 fa-xl"></i>
+                            Progress
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <i class="fa-solid fa-id-card pe-2 fa-xl"></i>
+                            Profile
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <!-- Main Component -->
+        <div class="main">
+            <nav class="navbar navbar-expand px-3 border-bottom">
+                <!-- Button for sidebar toggle -->
+
+                
+                <button class="btn btn-lg btn-outline-light" type="button" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Search form -->
+                <div class="container">
+                    <form class="search-form">
+                        <i class="fas fa-search pe-2 fa-lg"></i>
+                        <input id="text-field-hero-input" class="search-input" placeholder="Search Park...">
+                    </form>
+                </div>
+                <!-- end search form -->
+            </nav>
+            <main class="content px-3 py-2">
+                <div class="container-fluid">
+                    <div class="mb-3">
+                        <h3>Welcome to ParkQuest!</h3>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+/* Elements */
+
+main {
+    font-family: 'Poppins', sans-serif;
+    background-color: rgba(0, 0, 0, 0.6); 
+}
+
+/* IDs */
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+#search-section {
+    flex: 1;
+    margin-right: 20px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#requestBtn {
+    width: 150px;
+    height: 50px;
+}
+
+#action-buttons {
+    width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#action-buttons h3 {
+    font-size: 18;
+}
+
+#action-buttons h5 {
+    font-size: 12;
+}
+
+/* Classes */
+.userCard {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pageTitle {
+    font-size: 3.5rem;
+    color: #FFF;
+
+}

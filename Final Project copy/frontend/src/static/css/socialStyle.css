@@ -1,0 +1,92 @@
+/* Elements */
+
+main {
+    font-family: 'Poppins', sans-serif;
+    background-color: rgba(0, 0, 0, 0.6); 
+}
+
+h1 a {
+    text-decoration: none;
+    color: #FFF;
+}
+
+h1 a:hover {
+    color: #bbb;
+}
+
+/* IDs */
+
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #FFF;
+    padding: 20px;
+}
+
+#postForm {
+    width: 100%;
+}
+
+#postLabel {
+    color: #000;
+}
+
+#postsContainer {
+    width: 75%;
+}
+
+/* Classes */
+
+.pageTitle {
+    font-size: 3.5rem;
+    color: #FFF;
+
+}
+
+@media (max-width: 500px) {
+    .profile {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .postDate {
+        font-size: 12px;
+    }
+
+    .profile h3 {
+        font-size: 18px;
+        text-align: left;
+    }
+
+    .profile h5 {
+        font-size: 14px;
+        text-align: left;
+    }
+}
+
+@media (min-width: 501px) {
+    .postDate {
+        font-size: 14px;
+    }
+
+    .profile {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .profile h3 {
+        text-align: left;
+    }
+    
+    .profile h5 {
+        text-align: left;
+    }
+}
+
+.postTitle {
+    display: flex;
+    justify-content: space-between;
+}

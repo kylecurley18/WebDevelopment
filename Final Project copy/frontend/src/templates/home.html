@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="./js/script.js"></script>
+    <script defer type="module" src="./js/common.js"></script>
+    <link rel="stylesheet" href="./css/indexStyle.css">
+    <!-- Icon kit from https://fontawesome.com/-->
+    <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/27c4ffa0b7.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <title>Home Page</title>
+    <script defer src="./js/park.js" type="module"></script>
+    <link rel="manifest" href="../manifest.webmanifest" crossorigin="use-credentials" />
+    <meta name="theme-color" content="#252831">
+    <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="../img/favicon-32x32.png">
+
+    <!-- <style>
+        #map {
+            width: 70%; 
+            height: 400px; 
+        }
+        
+        .map-container {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 aspect ratio (divide 9 by 16 = 0.5625) */
+        }
+
+
+    </style> -->
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <aside id="sidebar">
+            <div class="sidebar-bckgrd">
+                <div class="sidebar-logo">
+                    <img src="../img/parklogo.png">
+                </div>
+                <!-- Sidebar Navigation -->
+                <ul class="sidebar-nav">
+                    
+                    <li class="sidebar-item">
+                        <a href="/home" class="sidebar-link">
+                            <i class="fa-solid fa-list pe-2 fa-lg"></i>
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="/community" class="sidebar-link">
+                            <i class="fa-solid fa-user-group pe-2 fa-xl"></i>
+                            Community
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="/social" class="sidebar-link">
+                            <i class="fa-solid fa-comment pe-2 fa-xl"></i>
+                            Social
+                        </a>
+                    </li>
+
+
+                    <li class="sidebar-item">
+                        <a href="/progress" class="sidebar-link">
+                            <i class="fa-solid fa-chart-line pe-2 fa-xl"></i>
+                            Progress
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a id="profile-link" href="#" class="sidebar-link">
+                            <i class="fa-solid fa-id-card pe-2 fa-xl"></i>
+                            Profile
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <!-- Main Component -->
+        <div class="main">
+            <nav class="navbar navbar-expand px-3 border-bottom">
+                <!-- Button for sidebar toggle -->
+                <div id="navContainer">
+                    <div>
+                        <button class="btn btn-lg btn-outline-light" type="button" >
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+            <main class="content px-3 py-2">
+                <div class="container-fluid">
+                    <div class="mb-3">
+                        <h3>Welcome to ParkQuest!</h3>
+                        
+                        <div id="map"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="parks-select" class="form-label">Select a park:</label>
+                        <select id="parks-select" class="form-select form-select-lg mb-3">
+                            <option value="all">All National Parks</option>
+                            <!-- Options will be dynamically populated by JavaScript -->
+                        </select>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <p class="form-label">User's Latitude: <span id="user-lat" class="form-label"></span></p>
+                        <p class="form-label">User's Longitude: <span id="user-lng" class="form-label"></span></p>
+                    </div>
+                    <div class="mb-3">
+                        <p class="form-label">Selected Park's Latitude: <span id="selected-park-lat" class="form-label"></span></p>
+                        <p class="form-label">Selected Park's Longitude: <span id="selected-park-lng" class="form-label"></span></p>
+                        <p class="form-label">Distance from User to selected park: <span id="distance-from-user" class="form-label"></span></p>
+                    </div>
+                    <button id="visit-button" class="btn btn-primary">Confirm Visit</button>
+                    
+
+                </div>
+            </main>
+        </div>
+    </div>
+    
+
+
+
+    
+    
+</body>
+
+<!-- <script>
+
+    var map = L.map('map').setView([51.505, -0.09], 8);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+       // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    navigator.geolocation.watchPosition(success, error);
+    let marker, circle, zoomed;
+
+    function success(pos) {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        const accuracy = pos.coords.accuracy;
+
+        if (marker) {
+            map.removeLayer(marker);
+            map.removeLayer(circle);
+        }
+
+        marker = L.marker([lat, lng]).addTo(map);
+        circle = L.circle([lat, lng], { radius: accuracy }).addTo(map);
+
+
+        //if the map is not zoomed, the zoom remains the same as the user set it
+        if (!zoomed) {
+            zoomed = map.fitBounds(circle.getBounds());
+
+        }
+
+        //follow the marker when location is changed
+        map.setView([lat, lng]);
+
+    }
+
+
+    function error(err) {
+        if (err.code == 1) {
+            alert("Error: Access is denied!");
+        } else {
+            alert("Error: " + err.message);
+        }
+    }
+
+</script> -->
+
+
+
+</html>
