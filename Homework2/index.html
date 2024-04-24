@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <script defer src="js/calc.js"></script>
+  <title>CSC 342 Homework 2 Calculator</title>
+</head>
+<body>
+    <div class="container">
+        <div class="leftSide">
+            <section class="screen">
+                <p class="input"></p>
+                <p class="output"></p>
+            </section>
+
+            <div class="buttons">
+                <button type="button" data-keyName="7" class="greyButton" value="7">7</button>
+                <button type="button" data-keyName="8" class="greyButton" value="8">8</button>
+                <button type="button" data-keyName="9" class="greyButton" value="9">9</button>
+                <button type="button" data-keyName="*" value="*">*</button>
+                <button type="button" data-keyName="+" value="+">+</button>
+
+                <button type="button" data-keyName="4" class="greyButton" value="4">4</button>
+                <button type="button" data-keyName="5" class="greyButton" value="5">5</button>
+                <button type="button" data-keyName="6" class="greyButton" value="6">6</button>
+                <button type="button" data-keyName="/" value="/">/</button>
+                <button type="button" data-keyName="-" value="-">-</button>
+
+                <button type="button" data-keyName="1" class="greyButton" value="1">1</button>
+                <button type="button" data-keyName="2" class="greyButton" value="2">2</button>
+                <button type="button" data-keyName="3" class="greyButton" value="3">3</button>
+
+                <button type="button" data-keyName="0" class="greyButton" value="0">0</button>
+                <button type="button" data-keyName="." class="greyButton" value=".">.</button>
+                <button type="button" data-keyName="C" value="clear">CLEAR</button>
+                <button type="button" data-keyName="=" class="blueButton" value="=">=</button>
+            </div>
+        </div>
+        <div class="rightSide">
+            <h4>HISTORY</h4>
+            <ul class="historyContainer"></ul>
+        </div>
+    </div>
+</body>
